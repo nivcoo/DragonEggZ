@@ -69,7 +69,7 @@ public class InteractEvent implements Listener {
         ItemStack itemInHand = e.getItem();
         Block b = e.getClickedBlock();
         List<String> worlds_list = config.getStringList("directly_in_inventory_worlds");
-        if ((worlds_list.size() != 0 && !worlds_list.contains(b.getLocation().getWorld().getName())) || (!a.equals(Action.LEFT_CLICK_BLOCK) && !a.equals(Action.RIGHT_CLICK_BLOCK)) || (itemInHand != null && !itemInHand.getType().equals(Material.DRAGON_EGG)) || !b.getType().equals(Material.DRAGON_EGG))
+        if ((worlds_list.size() != 0 && !worlds_list.contains(b.getLocation().getWorld().getName())) || (!a.equals(Action.LEFT_CLICK_BLOCK) && !a.equals(Action.RIGHT_CLICK_BLOCK)) || (itemInHand != null && itemInHand.getType().equals(Material.DRAGON_EGG)) || !b.getType().equals(Material.DRAGON_EGG))
             return;
 
         if (!p.hasPermission("dragoneggz.break")) {
