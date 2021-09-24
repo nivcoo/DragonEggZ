@@ -1,3 +1,6 @@
+directly_in_inventory_worlds:
+  - "SuperiorWorld"
+
 disable_teleport_worlds:
   - "SuperiorWorld"
 
