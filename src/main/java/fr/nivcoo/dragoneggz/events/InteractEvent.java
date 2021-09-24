@@ -80,8 +80,10 @@ public class InteractEvent implements Listener {
         Bukkit.getPluginManager().callEvent(blockBreakEvent);
         if (!blockBreakEvent.isCancelled()) {
             HashMap<Integer, ItemStack> nope = p.getInventory().addItem(b.getDrops().toArray(new ItemStack[0]));
+            p.sendMessage(config.getString("messages.success_break"));
             for (Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
                 p.getWorld().dropItemNaturally(p.getLocation(), entry.getValue());
+                p.sendMessage(config.getString("messages.success_break_drop"));
             }
             b.setType(Material.AIR);
         }

@@ -7,3 +7,5 @@ disable_piston_push_worlds:
 messages:
   cannot_place: "&cVous ne pouvez pas placer l'oeuf de dragon !"
   cannot_break: "&cVous ne pouvez pas casser l'oeuf de dragon !"
+  success_break: "&cVotre oeuf vient de vous être donné !"
+  success_break_drop: "&cVous n'avez plus de place, l'oeuf vient de tomber au sol !"
