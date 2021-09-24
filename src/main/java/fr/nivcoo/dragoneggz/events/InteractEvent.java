@@ -77,15 +77,15 @@ public class InteractEvent implements Listener {
             return;
         }
 
-        BlockBreakEvent exampleEvent = new BlockBreakEvent(b, p);
-        Bukkit.getPluginManager().callEvent(exampleEvent);
-
-        HashMap<Integer, ItemStack> nope = p.getInventory().addItem(b.getDrops().toArray(new ItemStack[0]));
-        for (Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
-            p.getWorld().dropItemNaturally(p.getLocation(), entry.getValue());
+        BlockBreakEvent blockBreakEvent = new BlockBreakEvent(b, p);
+        Bukkit.getPluginManager().callEvent(blockBreakEvent);
+        if (!blockBreakEvent.isCancelled()) {
+            HashMap<Integer, ItemStack> nope = p.getInventory().addItem(b.getDrops().toArray(new ItemStack[0]));
+            for (Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
+                p.getWorld().dropItemNaturally(p.getLocation(), entry.getValue());
+            }
+            b.setType(Material.AIR);
         }
-
-        b.setType(Material.AIR);
 
 
     }
