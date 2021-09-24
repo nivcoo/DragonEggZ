@@ -4,6 +4,7 @@ import fr.nivcoo.dragoneggz.DragonEggZ;
 import fr.nivcoo.utilsz.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,6 +46,8 @@ public class InteractEvent implements Listener {
         Player p = e.getPlayer();
         if (b.getType().equals(Material.DRAGON_EGG) && !p.hasPermission("dragoneggz.place")) {
             p.sendMessage(config.getString("messages.cannot_place"));
+            String startSound = config.getString("sounds.cancel");
+            p.playSound(p.getLocation(), Sound.valueOf(startSound), .4f, 1.7f);
             e.setCancelled(true);
         }
     }
@@ -56,6 +59,8 @@ public class InteractEvent implements Listener {
         if (b.getType().equals(Material.DRAGON_EGG)) {
             if (!p.hasPermission("dragoneggz.break")) {
                 p.sendMessage(config.getString("messages.cannot_break"));
+                String cancelSound = config.getString("sounds.cancel");
+                p.playSound(p.getLocation(), Sound.valueOf(cancelSound), .4f, 1.7f);
                 e.setCancelled(true);
             }
 
@@ -81,11 +86,15 @@ public class InteractEvent implements Listener {
         Bukkit.getPluginManager().callEvent(blockBreakEvent);
         if (!blockBreakEvent.isCancelled()) {
             HashMap<Integer, ItemStack> nope = p.getInventory().addItem(b.getDrops().toArray(new ItemStack[0]));
+            String interactSound = config.getString("sounds.interact");
+            p.playSound(b.getLocation(), Sound.valueOf(interactSound), .4f, 1.7f);
             p.sendMessage(config.getString("messages.success_break"));
             for (Map.Entry<Integer, ItemStack> entry : nope.entrySet()) {
                 p.getWorld().dropItemNaturally(p.getLocation(), entry.getValue());
                 p.sendMessage(config.getString("messages.success_break_drop"));
             }
+            String pickupSound = config.getString("sounds.pickup");
+            p.playSound(p.getLocation(), Sound.valueOf(pickupSound), .4f, 1.7f);
             b.setType(Material.AIR);
         }
 
@@ -106,7 +115,7 @@ public class InteractEvent implements Listener {
 
     public boolean canBePush(List<Block> blocks) {
         List<String> worlds_list = config.getStringList("disable_piston_push_worlds");
-        if (worlds_list.size() == 0 || !worlds_list.contains(blocks.get(0).getWorld().getName()))
+        if (worlds_list.size() == 0 || blocks.size() == 0 || !worlds_list.contains(blocks.get(0).getWorld().getName()))
             return true;
         for (Block block : blocks) {
             if (block.getType().equals(Material.DRAGON_EGG)) {

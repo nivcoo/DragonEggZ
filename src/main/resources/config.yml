@@ -10,6 +10,11 @@ disable_teleport_worlds:
 disable_piston_push_worlds:
   - "SuperiorWorld"
 
+sounds:
+  pickup: ENTITY_ITEM_PICKUP
+  interact: BLOCK_STONE_BREAK
+  cancel: BLOCK_ANVIL_BREAK
+
 messages:
   cannot_place: "&7[&c&lES&7] &cVous ne pouvez pas placer l'Oeuf de Dragon !"
   cannot_break: "&7[&c&lES&7] &cVous ne pouvez pas casser l'Oeuf de Dragon !"
