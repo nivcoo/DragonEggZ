@@ -68,7 +68,7 @@ public class InteractEvent implements Listener {
         Action a = e.getAction();
         ItemStack itemInHand = e.getItem();
         Block b = e.getClickedBlock();
-        if (a != Action.PHYSICAL || (itemInHand != null && !itemInHand.getType().equals(Material.DRAGON_EGG)) || !b.getType().equals(Material.DRAGON_EGG))
+        if ((!a.equals(Action.LEFT_CLICK_BLOCK) && !a.equals(Action.RIGHT_CLICK_BLOCK)) || (itemInHand != null && !itemInHand.getType().equals(Material.DRAGON_EGG)) || !b.getType().equals(Material.DRAGON_EGG))
             return;
 
         if (!p.hasPermission("dragoneggz.break")) {
