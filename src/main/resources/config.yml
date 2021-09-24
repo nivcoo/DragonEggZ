@@ -1,9 +1,12 @@
+# keep [] for all worlds
 directly_in_inventory_worlds:
   - "SuperiorWorld"
 
+# keep [] for all worlds
 disable_teleport_worlds:
   - "SuperiorWorld"
 
+# keep [] for all worlds
 disable_piston_push_worlds:
   - "SuperiorWorld"
 
