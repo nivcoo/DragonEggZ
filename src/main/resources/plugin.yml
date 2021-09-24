@@ -1,7 +1,7 @@
 name: DragonEggz
 version: 1.0.0
 author: nivcoo
-main: fr.nivcoo.dragoneggz.DragonEggz
+main: fr.nivcoo.dragoneggz.DragonEggZ
 permissions:
   dragoneggz.break:
     default: op
