@@ -8,7 +8,7 @@ disable_piston_push_worlds:
   - "SuperiorWorld"
 
 messages:
-  cannot_place: "&cVous ne pouvez pas placer l'oeuf de dragon !"
-  cannot_break: "&cVous ne pouvez pas casser l'oeuf de dragon !"
-  success_break: "&cVotre oeuf vient de vous être donné !"
-  success_break_drop: "&cVous n'avez plus de place, l'oeuf vient de tomber au sol !"
+  cannot_place: "&7[&c&lES&7] &cVous ne pouvez pas placer l'Oeuf de Dragon !"
+  cannot_break: "&7[&c&lES&7] &cVous ne pouvez pas casser l'Oeuf de Dragon !"
+  success_break: "&7[&c&lES&7] &aVotre Oeuf de Dragon vient de vous être donné !"
+  success_break_drop: "&7[&c&lES&7] &aVous n'avez plus de place, l'Oeuf de Dragon vient de tomber au sol !"
