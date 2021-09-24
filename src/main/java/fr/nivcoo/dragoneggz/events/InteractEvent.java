@@ -9,10 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockFromToEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -91,5 +88,30 @@ public class InteractEvent implements Listener {
 
 
     }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onLoaderPistonRetract(BlockPistonRetractEvent e) {
+        List<Block> blocks = e.getBlocks();
+        e.setCancelled(!canBePush(blocks));
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onLoaderPistonExtend(BlockPistonExtendEvent e) {
+        List<Block> blocks = e.getBlocks();
+        e.setCancelled(!canBePush(blocks));
+    }
+
+    public boolean canBePush(List<Block> blocks) {
+        List<String> worlds_list = config.getStringList("disable_piston_push_worlds");
+        if (!worlds_list.contains(blocks.get(0).getWorld().getName()))
+            return true;
+        for (Block block : blocks) {
+            if (block.getType().equals(Material.DRAGON_EGG)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
