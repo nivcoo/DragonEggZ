@@ -1,0 +1,6 @@
+disable_teleport_worlds:
+  - "SuperiorWorld"
+
+messages:
+  cannot_place: "&cVous ne pouvez pas placer l'oeuf de dragon !"
+  cannot_break: "&cVous ne pouvez pas casser l'oeuf de dragon !"

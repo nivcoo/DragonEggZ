@@ -1,0 +1,11 @@
+name: DragonEggz
+version: 1.0.0
+author: nivcoo
+main: fr.nivcoo.dragoneggz.DragonEggz
+permissions:
+  dragoneggz.break:
+    default: op
+    description: break
+  dragoneggz.place:
+    default: op
+    description: place
