@@ -57,9 +57,11 @@ public class InteractEvent implements Listener {
         Block b = e.getBlock();
         Player p = e.getPlayer();
         if (b.getType().equals(Material.DRAGON_EGG)) {
-            if (!p.hasPermission("dragoneggz.break"))
+            if (!p.hasPermission("dragoneggz.break")) {
                 p.sendMessage(config.getString("messages.cannot_break"));
-            e.setCancelled(true);
+                e.setCancelled(true);
+            }
+
         }
     }
 
