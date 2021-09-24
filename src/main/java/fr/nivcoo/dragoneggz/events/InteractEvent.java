@@ -34,7 +34,7 @@ public class InteractEvent implements Listener {
     public void onBlockFromTo(BlockFromToEvent e) {
         Block b = e.getBlock();
         List<String> worlds_list = config.getStringList("disable_teleport_worlds");
-        if (b.getType().equals(Material.DRAGON_EGG) && worlds_list.contains(b.getLocation().getWorld().getName())) {
+        if (b.getType().equals(Material.DRAGON_EGG) && (worlds_list.size() == 0 || worlds_list.contains(b.getLocation().getWorld().getName()))) {
             e.setCancelled(true);
         }
     }
@@ -103,7 +103,7 @@ public class InteractEvent implements Listener {
 
     public boolean canBePush(List<Block> blocks) {
         List<String> worlds_list = config.getStringList("disable_piston_push_worlds");
-        if (!worlds_list.contains(blocks.get(0).getWorld().getName()))
+        if (worlds_list.size() == 0 || !worlds_list.contains(blocks.get(0).getWorld().getName()))
             return true;
         for (Block block : blocks) {
             if (block.getType().equals(Material.DRAGON_EGG)) {
