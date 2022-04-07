@@ -31,7 +31,7 @@ public class InteractEvent implements Listener {
 
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockFromTo(BlockFromToEvent e) {
         Block b = e.getBlock();
         List<String> worlds_list = config.getStringList("disable_teleport_worlds");
@@ -96,6 +96,7 @@ public class InteractEvent implements Listener {
             String pickupSound = config.getString("sounds.pickup");
             p.playSound(p.getLocation(), Sound.valueOf(pickupSound), .4f, 1.7f);
             b.setType(Material.AIR);
+            e.setCancelled(true);
         }
 
 
