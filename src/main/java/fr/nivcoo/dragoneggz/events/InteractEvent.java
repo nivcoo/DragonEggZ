@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class InteractEvent implements Listener {
 
@@ -74,11 +75,12 @@ public class InteractEvent implements Listener {
         ItemStack itemInHand = e.getItem();
         Block b = e.getClickedBlock();
         List<String> worlds_list = config.getStringList("directly_in_inventory_worlds");
-        if ((worlds_list.size() != 0 && !worlds_list.contains(b.getLocation().getWorld().getName())) || (!a.equals(Action.LEFT_CLICK_BLOCK) && !a.equals(Action.RIGHT_CLICK_BLOCK)) || (itemInHand != null && itemInHand.getType().equals(Material.DRAGON_EGG)) || !b.getType().equals(Material.DRAGON_EGG))
+        if ((worlds_list.size() != 0 && !worlds_list.contains(b != null ? b.getLocation().getWorld().getName() : null)) || (!a.equals(Action.LEFT_CLICK_BLOCK) && !a.equals(Action.RIGHT_CLICK_BLOCK)) || (itemInHand != null && itemInHand.getType().equals(Material.DRAGON_EGG)) || !Objects.requireNonNull(b).getType().equals(Material.DRAGON_EGG))
             return;
 
         if (!p.hasPermission("dragoneggz.break")) {
             p.sendMessage(config.getString("messages.cannot_break"));
+            e.setCancelled(true);
             return;
         }
 
@@ -105,25 +107,25 @@ public class InteractEvent implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onLoaderPistonRetract(BlockPistonRetractEvent e) {
         List<Block> blocks = e.getBlocks();
-        e.setCancelled(!canBePush(blocks));
+        e.setCancelled(cantBePush(blocks));
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onLoaderPistonExtend(BlockPistonExtendEvent e) {
         List<Block> blocks = e.getBlocks();
-        e.setCancelled(!canBePush(blocks));
+        e.setCancelled(cantBePush(blocks));
     }
 
-    public boolean canBePush(List<Block> blocks) {
+    public boolean cantBePush(List<Block> blocks) {
         List<String> worlds_list = config.getStringList("disable_piston_push_worlds");
         if (worlds_list.size() == 0 || blocks.size() == 0 || !worlds_list.contains(blocks.get(0).getWorld().getName()))
-            return true;
+            return false;
         for (Block block : blocks) {
             if (block.getType().equals(Material.DRAGON_EGG)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 
